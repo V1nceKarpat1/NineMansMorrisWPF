@@ -1,0 +1,143 @@
+﻿<Window x:Class="NineMansMorrisView.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NineMansMorrisView"
+
+        mc:Ignorable="d"
+        Title="MainWindow" Height="730" Width="670" Left="150" Top="50">
+    <DockPanel>
+        <!--menu-->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Fájl">
+                <MenuItem Header="Új játék" Command="{Binding NewGameCommand}" />
+                <MenuItem Header="Játék betöltése..." Command="{Binding LoadGameCommand}" />
+                <MenuItem Header="Játék mentése..." Command="{Binding SaveGameCommand}" />
+            </MenuItem>
+            <MenuItem Header="Deselect" Command="{Binding DeselectCommand}" IsEnabled="{Binding CanDeselect}" />
+            <MenuItem Header="Pass Turn" Command="{Binding PassTurnCommand}" IsEnabled="{Binding CanPassTurn}" />
+        </Menu>
+        <!--statusbar-->
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="White Player Pieces:" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} / {1}">
+                            <Binding Path="WhitePiecesOnBoard" />
+                            <Binding Path="WhitePiecesPlaced" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StatusBarItem>
+
+            <Separator />
+
+            <StatusBarItem>
+                <TextBlock Text="Black Player Pieces:" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} / {1}">
+                            <Binding Path="BlackPiecesOnBoard" />
+                            <Binding Path="BlackPiecesPlaced" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StatusBarItem>
+
+            <Separator />
+
+            <StatusBarItem>
+                <TextBlock Text="Current Player:" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding CurrentPlayerName}" />
+            </StatusBarItem>
+
+            <Separator />
+
+            <StatusBarItem>
+                <TextBlock Text="Action:" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding GamePhase}" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <!--board-->
+        <Grid>
+            <!--drawing lines-->
+            <ItemsControl ItemsSource="{Binding VMLines}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Background="LightCyan" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Line  X1="{Binding X1}" X2="{Binding X2}" Y1="{Binding Y1}" Y2="{Binding Y2}" Stroke="SkyBlue" StrokeThickness="2" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!--drawing buttons-->
+            <ItemsControl ItemsSource="{Binding VMNodes}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding NodeClickCommand}" CommandParameter="{Binding BoardCoordinate}" Width="26" Height="26">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Piece}" Value="BLACK">
+                                            <Setter Property="Background" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Piece}" Value="WHITE">
+                                            <Setter Property="Background" Value="White" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Piece}" Value="NONE">
+                                            <Setter Property="Background" Value="LightCyan" />
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding CanInteract}" Value="False">
+                                            <Setter Property="BorderBrush" Value="Black" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding CanInteract}" Value="True">
+                                            <Setter Property="BorderBrush" Value="#3dfc03" />
+                                            <Setter Property="BorderThickness" Value="3" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <!--remove hover-->
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Canvas.Left" Value="{Binding CanvasX}" />
+                        <Setter Property="Canvas.Top" Value="{Binding CanvasY}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+        </Grid>
+    </DockPanel>
+</Window>

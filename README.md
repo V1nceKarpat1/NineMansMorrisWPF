@@ -18,7 +18,17 @@ A játékmenetet 5 különböző állapottal építettem fel. Egy állapot mindi
 - MOVE_END (a mozgatás célmezejének kiválasztása)
 - GAME_OVER (egy játékosnak csak két köve maradt, vége a játéknak)
 
-Egy éppen aktív játék bármikor elmenthető és a megfelelő szöveges mentésfájlok bármikor betölthetők. A mentési fájl felépítése soronként:
+Egy éppen aktív játék bármikor elmenthető és a megfelelő szöveges mentésfájlok bármikor betölthetők. Erre egy példa a NineMansMorrisModel/Persistence/SavedGames útvonalon található game1.nmm szöveges mentésfálj és minden további mentésfáljt is ide helyez el a program. A mentési fájl felépítése soronként:
+1.	játékfázis (string)
+2.	aktuális játékos (string)
+3.	fehér játékos letett bábuinak száma (int)
+4.	fehér játékos táblán lévő bábuinak száma (int)
+5.	fekete játékos letett bábuinak száma (int)
+6.	fekete játékos táblán lévő bábuinak száma (int)
+7.	aktuálisan kiválasztott mező koordinátái ((int,int,int) ha nincs ilyen akkor NOSELECT)
+   
+A 8. sortól kezdve a fájl végéig a mezők adatai szerepelnek a következő formában:
+<I koordináta (int)>  <J koordináta (int)> <R koordináta (int)> <mező színe (string)> <malomtagság (bool)> <interaktálhatóság (bool)>
 
 
 ### Tesztelés

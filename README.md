@@ -10,6 +10,7 @@ A repository cloneozása után meg kell nyitni a NineMansMorrisWPF.sln fáljt Vi
 A programot MVVM architektúrában valósítottam meg, az egyes rétegek fájljai külön vannak csoportosítva a fájlrendszerben. 
 ### Model 
 A legérdekesebb probléma a malom tábla reprezentálásának problémája volt. A malom tábla gyűrűkből áll melyeket egy-egy 3x3-as "középen lyukas" mártixszal reprezentáltam. A mezők egyértemű azonosításához egy olyan 3 dimenziós koordinátarendszert vezettem be, ahol az első két koordináta a mező adott gyűrűn elfoglalt vízszintes és függőleges pozícióját adja meg, a harmadik pedig a gyűrű számát adja meg. 
+![A kép leírása](Images/millCoordinates.png)
 
 A játékmenetet 5 különböző állapottal építettem fel. Egy állapot mindig a soron következő játékosra érvényes. Az állapotok az alábbiak:
 - PLACE (kő lehelyezezése)

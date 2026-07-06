@@ -10,7 +10,7 @@ A repository cloneozása után meg kell nyitni a NineMansMorrisWPF.sln fáljt Vi
 A programot MVVM architektúrában valósítottam meg, az egyes rétegek fájljai külön vannak csoportosítva a fájlrendszerben. 
 ### Model 
 A legérdekesebb probléma a malom tábla reprezentálásának problémája volt. A malom tábla gyűrűkből áll melyeket egy-egy 3x3-as "középen lyukas" mártixszal reprezentáltam. A mezők egyértemű azonosításához egy olyan 3 dimenziós koordinátarendszert vezettem be, ahol az első két koordináta a mező adott gyűrűn elfoglalt vízszintes és függőleges pozícióját adja meg, a harmadik pedig a gyűrű számát adja meg. 
-![xdxdxd](Images/millCoordinates.png)
+![Malom tábla koordinátázása](Images/millCoordinates.png)
 
 A játékmenetet 5 különböző állapottal építettem fel. Egy állapot mindig a soron következő játékosra érvényes. Az állapotok az alábbiak:
 - PLACE (kő lehelyezezése)
@@ -18,6 +18,8 @@ A játékmenetet 5 különböző állapottal építettem fel. Egy állapot mindi
 - MOVE_BEGIN (a mozgatni kívánt kő kiválasztása)
 - MOVE_END (a mozgatás célmezejének kiválasztása)
 - GAME_OVER (egy játékosnak csak két köve maradt, vége a játéknak)
+A malom játékmenete alapján az alábbi állapotgép állítható fel:
+![Malom menetének állapotgépe](Images/gamePhases.png)
 
 Egy éppen aktív játék bármikor elmenthető és a megfelelő szöveges mentésfájlok bármikor betölthetők. Erre egy példa a NineMansMorrisModel/Persistence/SavedGames/game1.nmm elérési úton található szöveges fájl. A további mentések szintén ezen az elérési úton tárolódnak.  A mentési fájl felépítése soronként:
 1.	játékfázis (string)

@@ -18,6 +18,7 @@ A játékmenetet 5 különböző állapottal építettem fel. Egy állapot mindi
 - MOVE_BEGIN (a mozgatni kívánt kő kiválasztása)
 - MOVE_END (a mozgatás célmezejének kiválasztása)
 - GAME_OVER (egy játékosnak csak két köve maradt, vége a játéknak)
+  <br>
 A malom játékmenete alapján az alábbi állapotgép állítható fel:
 ![Malom menetének állapotgépe](Images/gamePhases.png)
 
